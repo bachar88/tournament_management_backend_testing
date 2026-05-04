@@ -20,12 +20,13 @@ public class Tournament {
     private TournamentStatus status;
     public Tournament() {}
 
-    public Tournament(String name, String format, LocalDate dateDebut, LocalDate dateFin, boolean inscOpen) {
+    public Tournament(String name, String format, LocalDate dateDebut, LocalDate dateFin, boolean inscOpen, TournamentStatus status) {
         this.name = name;
         this.format = format;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.inscOpen = inscOpen;
+        this.status=status;
     }
 
     // Getters and Setters
@@ -82,7 +83,4 @@ public class Tournament {
     public void setStatus(TournamentStatus st) {
         this.status = st;
     }
-
-
-
 }

@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/tournament")
+@RequestMapping("/api/tournaments")
 public class TournamentController {
     @Autowired
     private TournamentService tournamentService;
@@ -66,5 +66,6 @@ public class TournamentController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
 
 }
