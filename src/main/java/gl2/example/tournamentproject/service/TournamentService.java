@@ -12,18 +12,24 @@ import java.util.Optional;
 
 @Service
 public class TournamentService {
+
     @Autowired
     private TournamentRepository tournamentRepository;
+
     public List<Tournament> getAllTournaments() {
         return tournamentRepository.findAll();
+    }
+
+    public List<Tournament> getAllTournamentsOpen() {
+        return tournamentRepository.findByInscOpenTrue();
     }
 
     public Optional<Tournament> getTournamentById(Long id) {
         return tournamentRepository.findById(id);
     }
 
-    public Tournament addTournament(Tournament tournament) {
-        return tournamentRepository.save(tournament);
+    public Tournament addTournament(Tournament t) {
+        return tournamentRepository.save(t);
     }
 
     public void deleteTournament(Long id) {
@@ -31,28 +37,20 @@ public class TournamentService {
     }
 
     public Optional<Tournament> patchTournament(Long id, Map<String, Object> updates) {
-        return tournamentRepository.findById(id).map(existing -> {
+        Optional<Tournament> existing = tournamentRepository.findById(id);
+        if (existing.isEmpty()) return Optional.empty();
 
-            if (updates.containsKey("name")) {
-                existing.setName((String) updates.get("name"));
+        Tournament t = existing.get();
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "name"      -> t.setName((String) value);
+                case "format"    -> t.setFormat((String) value);
+                case "inscOpen"  -> t.setInscOpen((Boolean) value);
+                case "dateDebut" -> t.setDateDebut(LocalDate.parse((String) value));
+                case "dateFin"   -> t.setDateFin(LocalDate.parse((String) value));
+                case "status"    -> t.setStatus(Tournament.TournamentStatus.valueOf((String) value));
             }
-            if (updates.containsKey("format")) {
-                existing.setFormat((String) updates.get("format"));
-            }
-            if (updates.containsKey("dateDebut")) {
-                existing.setDateDebut(LocalDate.parse((String) updates.get("dateDebut")));
-            }
-            if (updates.containsKey("dateFin")) {
-                existing.setDateFin(LocalDate.parse((String) updates.get("dateFin")));
-            }
-            if (updates.containsKey("inscOpen")) {
-                existing.setInscOpen((Boolean) updates.get("inscOpen"));
-            }
-
-            return tournamentRepository.save(existing);
         });
-    }
-    public List<Tournament> getAllTournamentsOpen(){
-        return tournamentRepository.findByInscOpenTrue();
+        return Optional.of(tournamentRepository.save(t));
     }
 }
