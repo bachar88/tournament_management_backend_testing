@@ -26,21 +26,28 @@ public class MatchDTO {
         this.scheduledAt = m.getScheduledAt();
     }
 
-    // getters/setters
+    // Getters et Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
     public Long getTournamentId() { return tournamentId; }
     public void setTournamentId(Long tournamentId) { this.tournamentId = tournamentId; }
+
     public Long getTeamAId() { return teamAId; }
     public void setTeamAId(Long teamAId) { this.teamAId = teamAId; }
+
     public Long getTeamBId() { return teamBId; }
     public void setTeamBId(Long teamBId) { this.teamBId = teamBId; }
+
     public int getScoreA() { return scoreA; }
     public void setScoreA(int scoreA) { this.scoreA = scoreA; }
+
     public int getScoreB() { return scoreB; }
     public void setScoreB(int scoreB) { this.scoreB = scoreB; }
+
     public Match.MatchStatus getStatus() { return status; }
     public void setStatus(Match.MatchStatus status) { this.status = status; }
+
     public LocalDateTime getScheduledAt() { return scheduledAt; }
     public void setScheduledAt(LocalDateTime scheduledAt) { this.scheduledAt = scheduledAt; }
 }

@@ -27,7 +27,9 @@ public class Match {
     private int scoreA;
     private int scoreB;
 
+    @Enumerated(EnumType.STRING)
     private MatchStatus status;
+
     private LocalDateTime scheduledAt;
 
     public Match() {}
@@ -42,6 +44,7 @@ public class Match {
         this.scoreB = 0;
     }
 
+    // Getters et Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
